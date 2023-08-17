@@ -20,7 +20,7 @@ public class SupplierEntity extends BaseEntity{
 	
 	private String email;
 	
-	private String decription;
+	private String description;
 
 	public Long getSupplierId() {
 		return supplierId;
@@ -54,12 +54,12 @@ public class SupplierEntity extends BaseEntity{
 		this.email = email;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String decription) {
+		this.description = decription;
 	}
 	
 	
