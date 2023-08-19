@@ -12,15 +12,11 @@ public class ProvinceDTO {
 	
 	private String name;
 	
-	@JsonFormat(pattern = "yyy-MM-dd HH:mm:ss")
-	private Date createDate;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
+	private Date createdDate;
 	
-	@JsonFormat(pattern = "yyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
 	private Date modifierDate;
-	
-	private String createBy;
-	
-	private String modifierBy;
 
 	public Long getProvinceId() {
 		return provinceId;
@@ -46,12 +42,12 @@ public class ProvinceDTO {
 		this.name = name;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Date getModifierDate() {
@@ -61,22 +57,5 @@ public class ProvinceDTO {
 	public void setModifierDate(Date modifierDate) {
 		this.modifierDate = modifierDate;
 	}
-
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	public String getModifierBy() {
-		return modifierBy;
-	}
-
-	public void setModifierBy(String modifierBy) {
-		this.modifierBy = modifierBy;
-	}
-	
 	
 }
