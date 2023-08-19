@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shoppeClone.shoppeClone.dto.cart.CartDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.entity.CartEntity;
+import com.shoppeClone.shoppeClone.entity.CategoryEntity;
 import com.shoppeClone.shoppeClone.entity.ProductEntity;
 import com.shoppeClone.shoppeClone.entity.UserEntity;
 import com.shoppeClone.shoppeClone.respository.UserRepository;
@@ -63,5 +65,12 @@ public class CartConverter {
         }
         return cartEntities;
     }
+
+    public CartEntity toEntity(CartEntity cartEntity, CartDTO cartDTO) {
+		cartEntity.setUserId(cartDTO.getUserId());
+		cartEntity.setProductId(cartDTO.getProductId());
+		cartEntity.setQuantity(cartDTO.getQuantity());
+		return cartEntity;
+	}
 }
 

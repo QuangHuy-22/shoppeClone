@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.cart.CartDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.service.CartService;
 
 import javassist.NotFoundException;
@@ -41,7 +43,11 @@ public class CartV1Api {
         cartService.deleteCart(cartId);
     }
 
-    
+    @PutMapping("{cartId}")
+	public CartDTO updateCart(@PathVariable(value = "cartId") Long cartId,
+			@RequestBody CartDTO dto) {
+		return cartService.updateCart(cartId, dto);
+	}
     
     
 }

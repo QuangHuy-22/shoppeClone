@@ -1,5 +1,7 @@
 package com.shoppeClone.shoppeClone.dto.cart;
 
+import com.shoppeClone.shoppeClone.entity.UserEntity;
+
 public class CartDTO {
 
     private Long cartId;
@@ -52,6 +54,7 @@ public class CartDTO {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 
 	
 	

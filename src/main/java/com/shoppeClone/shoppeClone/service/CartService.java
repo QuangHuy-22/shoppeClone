@@ -18,6 +18,8 @@ public interface CartService {
 
     void deleteCart(Long cartId);
     
+    CartDTO updateCart(Long cartId, CartDTO cartDTO);
+    
     PageDTO<CartDTO> getCarts(Map<String, String> params);
 
     

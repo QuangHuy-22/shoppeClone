@@ -25,6 +25,10 @@ public class CartEntity extends BaseEntity{
 	private ProductEntity product;
 	
 	private Integer quantity;
+	
+	private Long userId;
+	
+	private Long productId;
 
 	public Long getCartId() {
 		return cartId;
@@ -57,6 +61,24 @@ public class CartEntity extends BaseEntity{
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+	
+	public Long getUserId() {
+		return userId;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	
 	
 	
 }

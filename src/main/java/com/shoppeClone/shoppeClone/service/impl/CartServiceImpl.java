@@ -105,5 +105,16 @@ public class CartServiceImpl implements CartService{
 		return new PageDTO<>(page, limit, totalItems, dtos);
 	}
 
+	@Override
+	public CartDTO updateCart(Long cartId, CartDTO cartDTO) {
+		CartEntity cartEntity = cartRepository
+				.findById(cartId).orElseThrow(() -> new ValidateException("Cart not found"));
+		
+		cartConverter.toEntity(cartEntity, cartDTO);
+		cartRepository.save(cartEntity);
+		
+		return cartConverter.toDTO(cartEntity);
+	}
+
 
 }

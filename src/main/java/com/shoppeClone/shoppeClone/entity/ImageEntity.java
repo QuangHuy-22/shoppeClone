@@ -9,8 +9,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="images")
-public class ImageEntity {
+@Table(name = "images")
+public class ImageEntity extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long imageId;
@@ -20,19 +21,19 @@ public class ImageEntity {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
+	@JoinColumn(name = "product_id")
 	private ProductEntity product;
-
-	public Long getImageId() {
-		return imageId;
-	}
-
+	
 	public ProductEntity getProduct() {
 		return product;
 	}
 
 	public void setProduct(ProductEntity product) {
 		this.product = product;
+	}
+
+	public Long getImageId() {
+		return imageId;
 	}
 
 	public void setImageId(Long imageId) {
@@ -54,6 +55,5 @@ public class ImageEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 	
 }
