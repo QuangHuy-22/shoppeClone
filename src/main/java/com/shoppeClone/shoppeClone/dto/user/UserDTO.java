@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.shoppeClone.shoppeClone.dto.RoleDTO;
-import com.shoppeClone.shoppeClone.entity.RoleEntity;
 
 
 public class UserDTO {
