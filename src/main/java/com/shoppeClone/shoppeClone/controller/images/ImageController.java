@@ -23,7 +23,6 @@ public class ImageController {
 			@RequestParam("file") MultipartFile multipartFile,
 			@RequestParam(value = "description", required = false) String description
 			) {
-		
 		return imageService.saveImage(multipartFile, description);
 	}
 	

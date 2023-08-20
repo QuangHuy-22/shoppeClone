@@ -7,5 +7,4 @@ import com.shoppeClone.shoppeClone.dto.ImageDTO;
 public interface ImageService {
 
 	ImageDTO saveImage(MultipartFile file, String description);
-	
 }

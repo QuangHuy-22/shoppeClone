@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.cart.CartDTO;
-import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.service.CartService;
 
 import javassist.NotFoundException;
