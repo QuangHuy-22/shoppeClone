@@ -1,4 +1,4 @@
-package com.shopeeClone.shopeeClone.service.impl;
+package com.shoppeClone.shoppeClone.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -6,22 +6,22 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shopeeClone.shopeeClone.converter.Address.AddressConverter;
-import com.shopeeClone.shopeeClone.dto.PageDTO;
-import com.shopeeClone.shopeeClone.dto.address.AddressDTO;
-import com.shopeeClone.shopeeClone.dto.category.CategoryDTO;
-import com.shopeeClone.shopeeClone.entity.AddressEntity;
-import com.shopeeClone.shopeeClone.entity.CategoryEntity;
-import com.shopeeClone.shopeeClone.entity.DistrictEntity;
-import com.shopeeClone.shopeeClone.entity.ProvinceEntity;
-import com.shopeeClone.shopeeClone.entity.WardEntity;
-import com.shopeeClone.shopeeClone.exeption.ValidateException;
-import com.shopeeClone.shopeeClone.repository.address.AddressRepository;
-import com.shopeeClone.shopeeClone.repository.district.districtRepostory;
-import com.shopeeClone.shopeeClone.repository.province.provinceRepostory;
-import com.shopeeClone.shopeeClone.repository.ward.wardRepostory;
-import com.shopeeClone.shopeeClone.service.AddressService;
-import com.shopeeClone.shopeeClone.utils.AppStringUtils;
+import com.shoppeClone.shoppeClone.converter.Address.AddressConverter;
+import com.shoppeClone.shoppeClone.dto.PageDTO;
+import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
+import com.shoppeClone.shoppeClone.entity.AddressEntity;
+import com.shoppeClone.shoppeClone.entity.CategoryEntity;
+import com.shoppeClone.shoppeClone.entity.DistrictEntity;
+import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
+import com.shoppeClone.shoppeClone.entity.WardEntity;
+import com.shoppeClone.shoppeClone.exeption.ValidateException;
+import com.shoppeClone.shoppeClone.repository.address.AddressRepository;
+import com.shoppeClone.shoppeClone.repository.district.districtRepostory;
+import com.shoppeClone.shoppeClone.repository.province.provinceRepostory;
+import com.shoppeClone.shoppeClone.repository.ward.wardRepostory;
+import com.shoppeClone.shoppeClone.service.AddressService;
+import com.shoppeClone.shoppeClone.utils.AppStringUtils;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

@@ -1,17 +1,17 @@
-package com.shopeeClone.shopeeClone.converter.Address;
+package com.shoppeClone.shoppeClone.converter.Address;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.shopeeClone.shopeeClone.dto.address.AddressDTO;
-import com.shopeeClone.shopeeClone.dto.category.CategoryDTO;
-import com.shopeeClone.shopeeClone.entity.AddressEntity;
-import com.shopeeClone.shopeeClone.entity.CategoryEntity;
-import com.shopeeClone.shopeeClone.entity.DistrictEntity;
-import com.shopeeClone.shopeeClone.entity.ProvinceEntity;
-import com.shopeeClone.shopeeClone.entity.WardEntity;
+import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
+import com.shoppeClone.shoppeClone.entity.AddressEntity;
+import com.shoppeClone.shoppeClone.entity.CategoryEntity;
+import com.shoppeClone.shoppeClone.entity.DistrictEntity;
+import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
+import com.shoppeClone.shoppeClone.entity.WardEntity;
 
 @Component
 public class AddressConverter {

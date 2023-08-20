@@ -1,11 +1,11 @@
-package com.shopeeClone.shopeeClone.service;
+package com.shoppeClone.shoppeClone.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.shopeeClone.shopeeClone.dto.PageDTO;
-import com.shopeeClone.shopeeClone.dto.address.AddressDTO;
-import com.shopeeClone.shopeeClone.dto.category.CategoryDTO;
+import com.shoppeClone.shoppeClone.dto.PageDTO;
+import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 
 public interface AddressService {
 	

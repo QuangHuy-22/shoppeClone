@@ -1,4 +1,4 @@
-package com.shopeeClone.shopeeClone.api.Address;
+package com.shoppeClone.shoppeClone.api.Address;
 
 import java.util.List;
 import java.util.Map;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shopeeClone.shopeeClone.dto.PageDTO;
-import com.shopeeClone.shopeeClone.dto.address.AddressDTO;
-import com.shopeeClone.shopeeClone.dto.category.CategoryDTO;
-import com.shopeeClone.shopeeClone.service.AddressService;
+import com.shoppeClone.shoppeClone.dto.PageDTO;
+import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
+import com.shoppeClone.shoppeClone.service.AddressService;
 
 @RestController
 @RequestMapping("admin/api/v1/address")

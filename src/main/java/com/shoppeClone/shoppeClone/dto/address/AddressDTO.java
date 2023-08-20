@@ -1,11 +1,11 @@
-package com.shopeeClone.shopeeClone.dto.address;
+package com.shoppeClone.shoppeClone.dto.address;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.shopeeClone.shopeeClone.entity.DistrictEntity;
-import com.shopeeClone.shopeeClone.entity.ProvinceEntity;
-import com.shopeeClone.shopeeClone.entity.WardEntity;
+import com.shoppeClone.shoppeClone.entity.DistrictEntity;
+import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
+import com.shoppeClone.shoppeClone.entity.WardEntity;
 
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
