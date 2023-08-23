@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="admin/admin-layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+	
+		<h3>Cập nhật danh mục</h3>
+		<form id="updateCategoryForm">
+			<input type="hidden" name="provinceId" th:value="${province.provinceId}"/>
+			<div class="form-group">
+				<label>Tên tỉnh</label>
+				<input name="name" th:value = "${province.name}" class="form-control name"
+					placeholder="Tên tỉnh" />
+			</div>
+
+			<div class="form-group">
+				<label>Mô tả</label>
+				<input name="code" th:value = "${province.code}" class="form-control code" placeholder="Mã tỉnh" />
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit">Cập nhật danh mục
+				</button>
+			</div>
+		</form>
+
+		<script>
+			/* code javascript here */
+			
+			const updateForm = document.querySelector("#updateCategoryForm");
+			updateForm.addEventListener('submit', (e) => {
+				e.preventDefault();
+				const updateFormValue = formToObject("#updateCategoryForm");
+				
+				const {provinceId} = updateFormValue;
+				
+				put('/admin/api/v1/provinces/' + provinceId, updateFormValue)
+				.then(res => {
+					 window.location.href = '/admin/provinces/search';
+				})
+			})
+			
+		</script>
+	</div>

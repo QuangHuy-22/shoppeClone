@@ -4,11 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.dto.images.ImageDTO;
-import com.shoppeClone.shoppeClone.dto.supplier.SupplierDTO;
 
-public class ProductDTO {
+public class CreateProductDTO {
+
 
     private Long productId;
     private String name;
@@ -16,13 +15,9 @@ public class ProductDTO {
     private Double price;
     private Integer discountPercent;
     private String description;
-//    private Long categoryId; // Thay vì trực tiếp là CategoryDTO
-//    private Long supplierId;
+    private Long categoryId; // Thay vì trực tiếp là CategoryDTO
+    private Long supplierId;
     
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
-	private Date createdDate;
-    
-
     public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -31,38 +26,13 @@ public class ProductDTO {
 		this.createdDate = createdDate;
 	}
 
-	private CategoryDTO category; // Thêm trường kiểu CategoryDTO
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
+	private Date createdDate;
+
+//    private CategoryDTO category; // Thêm trường kiểu CategoryDTO
+//    private SupplierDTO supplier; // Thêm trường kiểu SupplierDTO
     
-    public CategoryDTO getCategory() {
-		return category;
-	}
-
-	public void setCategory(CategoryDTO category) {
-		this.category = category;
-	}
-
-	public SupplierDTO getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(SupplierDTO supplier) {
-		this.supplier = supplier;
-	}
-
-	private SupplierDTO supplier; // Thêm trường kiểu SupplierDTO
-    
-    private List<ImageDTO> images; // Thêm danh sách hình ảnh!!
-    
-    public List<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(List<ImageDTO> images) {
-		this.images = images;
-	}
-	
-
-	
+    private List<Long> imageIds; // Thêm danh sách hình ảnh!!
 
 	public Long getProductId() {
 		return productId;
@@ -112,26 +82,28 @@ public class ProductDTO {
 		this.description = description;
 	}
 
-//	public Long getCategoryId() {
-//		return categoryId;
-//	}
-//
-//	public void setCategoryId(Long categoryId) {
-//		this.categoryId = categoryId;
-//		
-//	}
-//
-//	public Long getSupplierId() {
-//		return supplierId;
-//	}
-//
-//	public void setSupplierId(Long supplierId) {
-//		this.supplierId = supplierId;
-//	}
+	public Long getCategoryId() {
+		return categoryId;
+	}
 
-	
-    
-    
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
 
-	
+	public Long getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
+	}
+
+	public List<Long> getImageIds() {
+		return imageIds;
+	}
+
+	public void setImageIds(List<Long> imageIds) {
+		this.imageIds = imageIds;
+	}
+    
 }

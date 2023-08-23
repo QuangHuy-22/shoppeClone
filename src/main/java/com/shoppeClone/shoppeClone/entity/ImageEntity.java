@@ -24,7 +24,11 @@ public class ImageEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private ProductEntity product;
-	
+
+	public Long getImageId() {	
+		return imageId;
+	}
+
 	public ProductEntity getProduct() {
 		return product;
 	}

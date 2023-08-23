@@ -10,20 +10,21 @@
 
 <body>
 	<div layout:fragment="content">
-		<form id="addCategoryForm">
-		<h3>Tạo tỉnh/ thành phố</h3>
+		<form id="addProvinceForm">
 			<div class="form-group">
-				<label>Tên danh mục</label>
+			<h3> Thêm tỉnh mới </h3>
+				
+				<label>Tên tỉnh</label>
 				<input name="name" class="form-control name"
-					placeholder="Tên danh mục" />
+					placeholder="Tên tỉnh" />
 			</div>
 
 			<div class="form-group">
-				<label>Mô tả</label>
-				<input name="description" class="form-control description" placeholder="Mô tả" />
+				<label>Mã Tỉnh</label>
+				<input name="code" class="form-control code" placeholder="Mã tỉnh" />
 			</div>
 			<div class="form-group">
-				<button class="btn btn-primary" type="submit">Tạo danh mục
+				<button class="btn btn-primary" type="submit">Tạo tỉnh
 				</button>
 			</div>
 		</form>
@@ -31,18 +32,15 @@
 		<script>
 			/* code javascript here */
 			
-			
-			
-			/*
-			const form = document.querySelector("#addCategoryForm");
+			const form = document.querySelector("#addProvinceForm");
 			form.addEventListener('submit', (e) => {
 				e.preventDefault();
-				const formValue = formToObject("#addCategoryForm");
-				post('/admin/api/v1/categories', formValue)
+				const formValue = formToObject("#addProvinceForm");
+				post('/admin/api/v1/provinces', formValue)
 				.then(response => {
-					window.location.href = "/admin/categories/search"
+					window.location.href = "/admin/provinces/search";
 				});
 			})
-			*/
+			
 		</script>
 	</div>

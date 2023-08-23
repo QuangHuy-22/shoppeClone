@@ -40,7 +40,7 @@ public class SercurityConfig {
 				.authorizeHttpRequests(http -> http
 				.requestMatchers("/admin**").hasAnyAuthority("ADMIN")
 				.requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-				.requestMatchers("/login").permitAll()
+				.requestMatchers("/login", "/images/**").permitAll()
 				.requestMatchers("/").permitAll()
 				.anyRequest().authenticated()).logout(httpLogout -> httpLogout
 						.logoutUrl("/logout")

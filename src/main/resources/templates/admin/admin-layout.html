@@ -49,6 +49,11 @@
 				<li class="nav-item"><a th:href="@{'/admin/categories/search'}" class="nav-link"
 					aria-current="page">  Danh sách
 				</a></li>
+				
+				<li class="nav-item"><a th:href="@{'/admin/products/add'}" class="nav-link"
+					aria-current="page">  Tạo ảnh sản phẩm
+				</a></li>
+				
 			<a href="#submenu1" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-dashboard fa-fw mr-3"></span> 
@@ -58,12 +63,13 @@
             </a>
             <!-- Submenu content -->
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Danh sách tỉnh</span>
-                </a>
                 <a  th:href="@{'/admin/provinces/add'}" class="list-group-item list-group-item-action ">
                     <span class="menu-collapsed">Thêm mới tỉnh</span>
                 </a>
+                 <a  th:href="@{'/admin/provinces/search'}" class="list-group-item list-group-item-action ">
+                    <span class="menu-collapsed">Danh sách</span>
+                </a>
+                 
             </div>
 			</ul>
 		</div>
