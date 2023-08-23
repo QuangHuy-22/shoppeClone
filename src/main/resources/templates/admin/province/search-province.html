@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="admin/admin-layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+
+<body>
+
+
+	<div layout:fragment="content">
+
+		<form id="category-filter-form">
+			<div class="form-group">
+				<input class="form-control" name="name" placeholder="Tên tỉnh" />
+			</div>
+			<button class="btn btn-primary" type="submit">Tìm kiếm</button>
+
+
+		</form>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Tên tỉnh</th>
+					<th>Mã tỉnh</th>
+					<th>Ngày tạo</th>
+					<th>Người tạo</th>
+					<th>Ngày chỉnh sửa</th>
+					<th>Người chỉnh sửa</th>
+					<th> Thao tác</th>
+					<th> Xóa</th>
+				</tr>
+			</thead>
+			<tbody id="categoryList">
+
+			</tbody>
+		</table>
+		<div id="demo" style="display: flex; justify-content: flex-end;"></div>
+
+		<script>
+		
+		const searchForm = document.querySelector('#category-filter-form');
+		const limit = 2;
+		let formValue = {};
+		
+		searchForm.addEventListener('submit', (e) => {
+			e.preventDefault();
+			formValue = formToObject('#category-filter-form');
+			getProvincesAndRender({
+				page: 1,
+				limit: limit,
+			})
+			
+		})
+		
+		const _$ = $;
+		
+		function showPagination({
+			totalItems,
+			limit,
+			currentPage,
+			onPageClick
+		}) {
+			_$("#demo").pagination({
+		        items: totalItems,
+		        itemsOnPage: limit,
+		        currentPage,
+		        prevText: "&laquo;",
+		        nextText: "&raquo;",
+		        onPageClick: onPageClick
+		  });
+		}
+		
+		showPagination({
+			totalItems: 1,
+			limit,
+			currentPage: 1,
+			onPageClick: () => {}
+		})
+		
+			function renderProvinces(provinces) {
+				let html = '';
+				for(const province of provinces) {
+					html += `
+						<tr id="province_${province.provinceId}">
+							<td>${province.provinceId}</td>						
+							<td>${province.name}</td>						
+							<td>${province.code}</td>						
+							<td>${province.createdDate}</td>						
+							<td>${province.createBy}</td>						
+							<td>${province.modifierDate}</td>						
+							<td>${province.modifierBy}</td>		
+							
+							<td> 
+								<a href = "/admin/provinces/${province.provinceId}">
+								<button class = "btn btn-primary"> Update </button>
+								</a>
+							</td> 
+							<td> 
+							<button onclick = "deleteProvince(${province.provinceId})" class = "btn btn-danger"> 
+							Delete
+							</button>
+						</td> 
+						</tr>
+					`;
+				}
+				document.querySelector("#categoryList").innerHTML = html;
+			}
+		
+			function deleteProvince(provinceId){
+				console.log(provinceId);
+				const isconfirm = confirm('Bạn có muốn xóa hay không');
+				if(isconfirm){
+					callDelete('/admin/api/v1/provinces/' + provinceId)
+					.then(res => {
+						console.log("xóa danh mục thanh công")
+						const provinceElement = document.querySelector("#province_" + provinceId);
+						provinceElement.remove();
+						
+					})	
+			}
+				
+			}
+			
+			function getProvincesAndRender({page, limit}) {
+				get(`/admin/api/v1/provinces`, {
+					page,
+					limit,
+					...formValue
+				})
+				.then(pageDto => {
+					renderProvinces(pageDto.data);
+					_$("#demo").pagination("destroy");
+					const {page,totalItems, limit} = pageDto;
+					
+					showPagination({
+						totalItems,
+						limit,
+						currentPage: page,
+						onPageClick: function (pageNumber) {
+							getProvincesAndRender({page: pageNumber, limit})
+				        	console.log(pageNumber)
+				        }
+					})
+				})
+			}
+			
+			
+			getProvincesAndRender({
+				page: 1,
+				limit: limit
+			});
+			
+		   
+			
+			
+		</script>
+	</div>

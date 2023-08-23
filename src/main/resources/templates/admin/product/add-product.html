@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="admin/admin-layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+		
+		<h1>Tạo sản phẩm</h1>
+		
+		<input type="file" id="fileInput" multiple />
+		
+		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  			<div class="carousel-inner images">
+  			</div>	
+  			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+			  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+  		</div>
+
+		<script>
+			const fileInput = document.querySelector("#fileInput");
+			const images = document.querySelector(".images");
+			
+			
+			fileInput.addEventListener('change', async (e) => {
+				const files = e.target.files;
+				const imageDtos = [];
+				for (var i = 0; i < files.length; i++) {
+				    const formData = new FormData();
+				    formData.append("file", files[i]);
+				    const res = await postFormData('/images/fileUpload', formData)
+				    imageDtos.push(res);
+				}
+				let html = '';
+				let index = 0;
+				for(let image of imageDtos) {
+					if(index === 0) {
+						html += `
+							 <div class="carousel-item active">
+						      <img class="d-block w-100" src="${image.url}" alt="${image.description}">
+						    </div>
+						`;
+					} else {
+						html += `
+							 <div class="carousel-item" style="width: 500px;">
+						      <img class="d-block w-100" src="${image.url}" alt="${image.description}">
+						    </div>
+						`;
+					}
+					index++;
+				}
+				console.log(html);
+				images.innerHTML = html;
+				
+			})
+		</script>
+	</div>
