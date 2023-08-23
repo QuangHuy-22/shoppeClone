@@ -2,6 +2,7 @@ package com.shoppeClone.shoppeClone.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,11 +21,11 @@ public class ImageEntity {
 	
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
 	private ProductEntity product;
 
-	public Long getImageId() {
+	public Long getImageId() {	
 		return imageId;
 	}
 

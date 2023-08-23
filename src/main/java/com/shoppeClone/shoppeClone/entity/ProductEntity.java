@@ -116,6 +116,17 @@ public class ProductEntity extends BaseEntity{
 	public void setImage(List<ImageEntity> image) {
 		this.images = image;
 	}
-	
+	public void addImage(ImageEntity image) {
+		images.add(image);
+		image.setProduct(this);
+	}
+
+	public List<ImageEntity> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageEntity> images) {
+		this.images = images;
+	}
 	
 }

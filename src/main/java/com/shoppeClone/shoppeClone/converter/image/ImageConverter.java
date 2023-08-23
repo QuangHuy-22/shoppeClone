@@ -9,7 +9,6 @@ import com.shoppeClone.shoppeClone.dto.images.ImageDTO;
 import com.shoppeClone.shoppeClone.entity.ImageEntity;
 
 
-
 @Component
 public class ImageConverter {
 
@@ -18,7 +17,6 @@ public class ImageConverter {
 		imageDTO.setDescription(imageEntity.getDescription());
 		imageDTO.setImageId(imageEntity.getImageId());
 		imageDTO.setUrl(imageEntity.getUrl());
-		
 		return imageDTO;
 	}
 	
@@ -32,8 +30,10 @@ public class ImageConverter {
 	
 	public List<ImageDTO> toDTOList(List<ImageEntity> imageEntities){
 		List<ImageDTO> imageDTOList = new ArrayList<>();
-		for (ImageEntity imageEntity : imageEntities) {
-			imageDTOList.add(toDTO(imageEntity));
+		if (imageEntities != null) {
+			for (ImageEntity imageEntity : imageEntities) {
+				imageDTOList.add(toDTO(imageEntity));
+			}
 		}
 		return imageDTOList;
 	}
