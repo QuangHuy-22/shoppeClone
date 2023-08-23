@@ -1,17 +1,22 @@
 package com.shoppeClone.shoppeClone.entity;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name="wards")
-public class WardEntity {
-
-
+@Table(name = "wards")
+public class WardEntity extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long wardId;
@@ -20,13 +25,37 @@ public class WardEntity {
 	private String code;
 	
 	private String name;
+	
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createDate;
+	
+	@LastModifiedDate
+	private Date modifierDate;
 
-	public Long getProvinceId() {
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getModifierDate() {
+		return modifierDate;
+	}
+
+	public void setModifierDate(Date modifierDate) {
+		this.modifierDate = modifierDate;
+	}
+
+
+	public Long getWardId() {
 		return wardId;
 	}
 
-	public void setProvinceId(Long provinceId) {
-		this.wardId = provinceId;
+	public void setWardId(Long wardId) {
+		this.wardId = wardId;
 	}
 
 	public String getCode() {
@@ -43,5 +72,6 @@ public class WardEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
+	
 }

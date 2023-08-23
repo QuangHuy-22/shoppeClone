@@ -1,6 +1,5 @@
 package com.shoppeClone.shoppeClone.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.shoppeClone.shoppeClone.dto.PageDTO;
