@@ -1,29 +1,20 @@
 package com.shoppeClone.shoppeClone.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoppeClone.shoppeClone.converter.Address.AddressConverter;
-import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
-import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.entity.AddressEntity;
-import com.shoppeClone.shoppeClone.entity.CategoryEntity;
-import com.shoppeClone.shoppeClone.entity.DistrictEntity;
-import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
-import com.shoppeClone.shoppeClone.entity.WardEntity;
-import com.shoppeClone.shoppeClone.exeption.ValidateException;
-import com.shoppeClone.shoppeClone.repository.address.AddressRepository;
-import com.shoppeClone.shoppeClone.repository.district.districtRepostory;
-import com.shoppeClone.shoppeClone.repository.province.provinceRepostory;
-import com.shoppeClone.shoppeClone.repository.ward.wardRepostory;
+import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.address.AddressRepository;
+import com.shoppeClone.shoppeClone.respository.district.DistrictRepository;
+import com.shoppeClone.shoppeClone.respository.pronvice.ProvinceRepository;
+import com.shoppeClone.shoppeClone.respository.ward.WardRepository;
 import com.shoppeClone.shoppeClone.service.AddressService;
-import com.shoppeClone.shoppeClone.utils.AppStringUtils;
 
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -34,11 +25,11 @@ public class AddressServiceImpl implements AddressService {
 	private AddressConverter addressConverter;
 	
 	@Autowired
-	private districtRepostory districtRepostory;
+	private DistrictRepository districtRepostory;
 	@Autowired
-	private provinceRepostory provinceRepostory;
+	private ProvinceRepository provinceRepostory;
 	@Autowired
-	private wardRepostory wardRepostory;
+	private WardRepository wardRepostory;
 	@Autowired
 	private AddressRepository addressRepository;
 	@Override

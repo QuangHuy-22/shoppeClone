@@ -37,9 +37,6 @@ public class ImageEntity extends BaseEntity {
 		this.product = product;
 	}
 
-	public Long getImageId() {
-		return imageId;
-	}
 
 	public void setImageId(Long imageId) {
 		this.imageId = imageId;

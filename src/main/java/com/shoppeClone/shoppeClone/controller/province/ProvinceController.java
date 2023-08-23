@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shoppeClone.shoppeClone.dto.province.ProvinceDTO;
-import com.shoppeClone.shoppeClone.service.ProductService;
 import com.shoppeClone.shoppeClone.service.ProvinceService;
 
 @Controller

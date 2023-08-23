@@ -1,4 +1,4 @@
-package com.shoppeClone.shoppeClone.repository.address;
+package com.shoppeClone.shoppeClone.respository.address;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
