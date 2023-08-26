@@ -1,4 +1,4 @@
-package com.shoppeClone.shoppeClone.converter.Address;
+package com.shopeeClone.shopeeClone.converter.Address;
 
 import java.util.ArrayList;
 import java.util.List;
