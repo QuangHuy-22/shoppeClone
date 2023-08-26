@@ -1,5 +1,6 @@
 package com.shoppeClone.shoppeClone.dto.product;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.shoppeClone.shoppeClone.api.orderProduct;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +19,12 @@ public class OrderProductV1Api {
 	private OrderProductService orderProductService;
 
 	@PostMapping
-	public OrderProductDTO createOrderProduct(@RequestBody OrderProductDTO dto) {
-		
+	public List<OrderProductDTO> createOrderProduct(
+			@RequestBody List<OrderProductDTO> dto
+						) 
+	{
+	
 		return orderProductService.createOrderProduct(dto);
+		
 	}
 }

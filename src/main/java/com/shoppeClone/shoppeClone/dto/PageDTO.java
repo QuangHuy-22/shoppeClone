@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PageDTO<T> {
 
-private Integer page;
+	private Integer page;
 	
 	private Integer limit;
 	

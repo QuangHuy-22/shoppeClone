@@ -31,10 +31,6 @@ public class AddressDTO {
 		this.addressId = addressId;
 	}
 
-
-	
-
-
 	public String getDescription() {
 		return description;
 	}
@@ -45,7 +41,6 @@ public class AddressDTO {
 	}
 
 
-	
 
 
 	public Long getProvince() {

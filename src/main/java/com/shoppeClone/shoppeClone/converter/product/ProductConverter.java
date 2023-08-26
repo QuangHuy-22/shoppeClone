@@ -114,6 +114,14 @@ public class ProductConverter {
 		}
     	return productDTOList;
     }
+    
+    public List<ProductEntity> toEntityList(List<CreateProductDTO> productDTOs){
+    	List<ProductEntity> productEntities = new ArrayList<>();
+    	for (CreateProductDTO producDTO : productDTOs) {
+			productEntities.add(toEntity(producDTO));
+		}
+    	return productEntities;
+    }
 
     private CategoryEntity getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
@@ -129,6 +137,19 @@ public class ProductConverter {
         return imageRepository.findById(imageId)
                 .orElseThrow(() -> new ValidateException("Không tìm thấy hình ảnh"));
     }
+
+	public ProductEntity toEntity(ProductDTO dto) {
+		ProductEntity productEntity = new ProductEntity();
+		 productEntity.setName(dto.getName());
+	        productEntity.setDescription(dto.getDescription());
+	        productEntity.setImportPrice(dto.getImportPrice());
+	        productEntity.setPrice(dto.getPrice());
+	        productEntity.setDiscountPercent(dto.getDiscountPercent());
+	        productEntity.setCreateDate(dto.getCreatedDate());
+
+	       
+		return productEntity;
+	}
 }
 
 

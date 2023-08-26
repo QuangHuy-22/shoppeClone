@@ -3,6 +3,7 @@ package com.shoppeClone.shoppeClone.api;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,12 @@ public class UserV1Api {
 	public PageDTO<UserDTO> getUser(
 			@RequestParam Map<String, String> params) {
 		return userService.getUser(params);
+	}
+	@DeleteMapping("{userId}")
+	public void deleteUser(
+			@PathVariable(value = "userId") Long userId
+			) 
+	{
+		userService.deleteUser(userId);
 	}
 }

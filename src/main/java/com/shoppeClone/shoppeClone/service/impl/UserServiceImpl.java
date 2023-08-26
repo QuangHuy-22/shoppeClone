@@ -22,39 +22,40 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private UserConverter userConverter;
-	
+
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Override
 	public UserDTO createUser(UserDTO dto) {
-		//		validate dữ liệu 
+		// validate dữ liệu
 		String username = dto.getUsername();
-				if (!AppStringUtils.hasText(username)) {
-					throw new ValidateException("Username không được để trống");
-				}
-		//Dto -> entity
+		if (!AppStringUtils.hasText(username)) {
+			throw new ValidateException("Username không được để trống");
+		}
+		// Dto -> entity
 		UserEntity newUserEntity = userConverter.toEntity(dto);
 		userRepository.save(newUserEntity);
-		//entity -> dto
+		// entity -> dto
 		UserDTO resultDto = userConverter.toDTO(newUserEntity);
 		return resultDto;
 	}
 
 	@Override
 	public UserDTO updateUser(Long userId, UserDTO userDTO) {
-		UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new ValidateException("User không tồn tại"));
-		
+		UserEntity userEntity = userRepository.findById(userId)
+				.orElseThrow(() -> new ValidateException("User không tồn tại"));
+
 		userConverter.toEntity(userEntity, userDTO);
 		userRepository.save(userEntity);
-		
+
 		return userConverter.toDTO(userEntity);
 	}
 
@@ -75,33 +76,39 @@ public class UserServiceImpl implements UserService{
 		// lấy dữ liệu
 		// đếm dữ liệu
 		StringBuilder selectQueryBuilder = new StringBuilder("SELECT c FROM UserEntity c");
-		StringBuilder countQueryBuilder 
-		= new StringBuilder("SELECT COUNT(c.userId) FROM UserEntity c");
-		
+		StringBuilder countQueryBuilder = new StringBuilder("SELECT COUNT(c.userId) FROM UserEntity c");
+
 		String name = params.get("username");
 		if (AppStringUtils.hasText(name)) {
-			selectQueryBuilder.append(" WHERE c.username LIKE :username" );
+			selectQueryBuilder.append(" WHERE c.username LIKE :username");
 			countQueryBuilder.append(" WHERE c.username LIKE :username");
 		}
-		TypedQuery<UserEntity> selectQuery 
-		= entityManager.createQuery(selectQueryBuilder.toString(), UserEntity.class);
+		TypedQuery<UserEntity> selectQuery = entityManager.createQuery(selectQueryBuilder.toString(), UserEntity.class);
 
-		TypedQuery<Long> countQuery 
-		= entityManager.createQuery(countQueryBuilder.toString(), Long.class);
+		TypedQuery<Long> countQuery = entityManager.createQuery(countQueryBuilder.toString(), Long.class);
 		Integer firstItems = (page - 1) * limit;
-		
+
 		if (AppStringUtils.hasText(name)) {
 			selectQuery.setParameter("name", "%" + name + "%");
 			countQuery.setParameter("name", "%" + name + "%");
 		}
 		selectQuery.setFirstResult(firstItems);
 		selectQuery.setMaxResults(limit);
-		
+
 		List<UserEntity> userEntities = selectQuery.getResultList();
 		Long totalItems = countQuery.getSingleResult();
-		
+
 		// entity -> dto
 		List<UserDTO> dtos = userConverter.toDTOList(userEntities);
 		return new PageDTO<>(page, limit, totalItems, dtos);
+	}
+
+	@Override
+	public void deleteUser(Long userId) {
+		UserEntity userEntity = userRepository
+				.findById(userId)
+				.orElseThrow(() -> new ValidateException("Không tìm thấy Id của user cần xóa"));
+		userRepository.delete(userEntity);
+
 	}
 }

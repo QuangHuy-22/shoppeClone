@@ -13,4 +13,6 @@ public interface UserService {
 
 	PageDTO<UserDTO> getUser(Map<String, String> params);
 	
+	void deleteUser(Long userId);
+	
 }

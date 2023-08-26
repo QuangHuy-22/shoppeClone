@@ -37,7 +37,7 @@ function put(path, body) {
 		headers: myHeaders
 	}).then(response => response.json())
 }
-function callDelete(path, body={	}) {
+function callDelete(path, body={}) {
 	var myHeaders = new Headers();
 	myHeaders.append('Content-Type', 'application/json');
 	return fetch(path, {

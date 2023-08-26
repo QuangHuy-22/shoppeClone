@@ -1,41 +1,40 @@
 package com.shoppeClone.shoppeClone.dto.orderProduct;
 
-import com.shoppeClone.shoppeClone.dto.product.ProductDTO;
-import com.shoppeClone.shoppeClone.entity.OrderEntity;
-import com.shoppeClone.shoppeClone.entity.ProductEntity;
-
-
-
 public class OrderProductDTO {
-
+	
 	private Long orderProductId;
-	private ProductDTO product;
-	private Integer quatity;
-	
-	
-	
-	
-	public ProductDTO getProduct() {
-		return product;
-	}
-	public void setProduct(ProductDTO product) {
-		this.product = product;
-	}
+	private Long  productId;
+	private Long orderId;
+	private Integer quantity;
 	public Long getOrderProductId() {
 		return orderProductId;
 	}
 	public void setOrderProductId(Long orderProductId) {
 		this.orderProductId = orderProductId;
 	}
-	
-	public Integer getQuatity() {
-		return quatity;
+	public Long getProductId() {
+		return productId;
 	}
-	public void setQuatity(Integer quatity) {
-		this.quatity = quatity;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
-	
-	
+	public Long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	@Override
+	public String toString() {
+		return "OrderProductDTO [orderProductId=" + orderProductId + ", productId=" + productId + ", orderId=" + orderId
+				+ ", quantity=" + quantity + "]";
+	}
 	
 	
 }

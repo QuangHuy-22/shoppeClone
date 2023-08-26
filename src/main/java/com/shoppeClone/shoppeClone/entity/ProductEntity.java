@@ -116,6 +116,7 @@ public class ProductEntity extends BaseEntity{
 	public void setImage(List<ImageEntity> image) {
 		this.images = image;
 	}
+	// Add image vào hàm entity để có thể hiện thị hình ảnh
 	public void addImage(ImageEntity image) {
 		images.add(image);
 		image.setProduct(this);

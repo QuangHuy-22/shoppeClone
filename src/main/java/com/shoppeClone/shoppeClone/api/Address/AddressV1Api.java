@@ -32,18 +32,24 @@ public class AddressV1Api {
 		return addressService.createAddress(dto);
 	}
 	@PutMapping("{addressId}")
-	public AddressDTO updateAddress(@PathVariable(value = "addressId") Long addressId,@RequestBody AddressDTO dto) {
+	public AddressDTO updateAddress(
+			@PathVariable(value = "addressId") Long addressId,
+			@RequestBody AddressDTO dto
+			)
+	{
 		return addressService.updateAddress(addressId, dto);
 	}
-//	@GetMapping()
-//	public PageDTO<AddressDTO> getAddress(
-//			@RequestParam Map<String , String> params) {
-//		return addressService.getAddress(params);
-//	}
-	@GetMapping
-	public List<AddressDTO> getaddress(){
-		return addressService.getAddress();
+	
+	@GetMapping()
+	public PageDTO<AddressDTO> getAddress(
+			@RequestParam Map<String , String> params) {
+		return addressService.getPageAddress(params);
 	}
+	
+//	@GetMapping
+//	public List<AddressDTO> getaddress(){
+//		return addressService.getAddress();
+//	}
 	
 	@DeleteMapping("{addressId}")
 	public void deleteCategoryById(
