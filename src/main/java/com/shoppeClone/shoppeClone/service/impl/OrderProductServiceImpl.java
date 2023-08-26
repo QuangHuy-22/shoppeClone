@@ -32,51 +32,17 @@ public class OrderProductServiceImpl implements OrderProductService {
 	@Autowired
 	private OrderProductConverter orderProductConverter;
 
-	@Autowired
-	private ProductConverter productConverter;
-
-	@Autowired
-	private ProductRepository productRepository;
-
-	@Autowired
-	private OrderRepository orderRepository;
+	
 
 	@Override
 	public List<OrderProductDTO> createOrderProduct(List<OrderProductDTO> dto) {
 
-		List<OrderProductEntity> orderProductEntities = new ArrayList<>();
-
-		for (OrderProductDTO orderProduct : dto) {
-			Long productId = orderProduct.getProductId();
-			Long orderId = orderProduct.getOrderId();
-			if (productId == null) {
-				throw new ValidateException("ProductId null");
-			}
-			if (orderId == null) {
-				throw new ValidateException("OrderId null");
-			}
-			if (orderProduct.getQuantity() == null) {
-				throw new ValidateException("Quantity null");
-			}
-
-			ProductEntity productEntity = productRepository.findById(productId)
-					.orElseThrow(() -> new ValidateException("Product không tồn tại"));
-
-			OrderEntity orderEntity = orderRepository.findById(orderId)
-					.orElseThrow(() -> new ValidateException("Orrder khog ton tai"));
-
-			// Gán productEntity vào orderProductDTO trước khi chuyển đổi
-			
-			OrderProductEntity orderProductEntity = new OrderProductEntity();
-			orderProductEntity.setOrder(orderEntity);
-			orderProductEntity.setProduct(productEntity);
-			orderProductEntity.setQuatity(orderProduct.getQuantity());
-			orderProductEntities.add(orderProductEntity);
-		}
+		List<OrderProductEntity> orderProductEntities = orderProductConverter.toEntityList(dto);
 
 		orderProductRepository.saveAll(orderProductEntities);
 
 		List<OrderProductDTO> result = orderProductConverter.toDTOList(orderProductEntities);
+		
 		return result;
 	}
 
