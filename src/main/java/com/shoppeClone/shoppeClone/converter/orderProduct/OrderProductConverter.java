@@ -6,10 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.shoppeClone.shoppeClone.converter.order.OrderConverter;
-import com.shoppeClone.shoppeClone.converter.product.ProductConverter;
 import com.shoppeClone.shoppeClone.dto.orderProduct.OrderProductDTO;
-import com.shoppeClone.shoppeClone.dto.product.ProductDTO;
 import com.shoppeClone.shoppeClone.entity.OrderEntity;
 import com.shoppeClone.shoppeClone.entity.OrderProductEntity;
 import com.shoppeClone.shoppeClone.entity.ProductEntity;
@@ -31,19 +28,48 @@ public class OrderProductConverter {
 	private OrderRepository orderRepository;
 	
 	
-	public OrderProductEntity toEntity(OrderProductDTO orderProductDTO) {
-        OrderProductEntity orderProductEntity = new OrderProductEntity();
-        
-        orderProductEntity.setQuatity(orderProductDTO.getQuantity());
-
-        // Chuyển đổi từ ProductDTO thành ProductEntity
-        Long productId = orderProductDTO.getProductId();
-//        ProductEntity productEntity = productConverter.toEntity(productId);
-//        orderProductEntity.setProduct(productEntity);
-
-        return orderProductEntity;
-    }
-
+	public OrderProductDTO toDTO(OrderProductEntity orderProductEntity) {
+		OrderProductDTO orderProductDTO = new OrderProductDTO();
+		orderProductDTO.setOrderProductId(orderProductEntity.getOrderProductId());
+		orderProductDTO.setQuantity(orderProductEntity.getQuatity());
+		orderProductDTO.setProductId(orderProductEntity.getProduct().getProductId());
+		orderProductDTO.setOrderId(orderProductEntity.getOrder().getOrderId());
+		
+		return orderProductDTO;
+		
+	}
+	
+	public OrderProductEntity toEntity(OrderProductDTO dto, OrderProductEntity entity) {
+		
+		entity.setQuatity(dto.getQuantity());
+		Long productId = dto.getProductId();
+		Long orderId = dto.getOrderId();
+		
+		if (productId == null) {
+			throw new ValidateException("Không tìm thấy Id của product");
+		}
+		if (orderId == null) {
+			throw new ValidateException("Không tìm thấy Id của Order");
+		}
+		
+		// Lấy Id của product trong DB
+		ProductEntity productEntity = productRepository
+				.findById(productId)
+				.orElseThrow(() -> new ValidateException("Không có Id này trong DB"));
+		
+		// Lấy Id của order trong DB
+		OrderEntity orderEntity = orderRepository
+				.findById(orderId)
+				.orElseThrow(() -> new ValidateException("Không có Id này trong DB"));
+		
+		entity.setProduct(productEntity);
+		entity.setOrder(orderEntity);
+		orderProductRepository.save(entity);
+		
+		return entity;
+		
+	}
+	
 	public List<OrderProductDTO> toDTOList(List<OrderProductEntity> orderProductEntities) {
 		List<OrderProductDTO> orderProductDTOs = new ArrayList<>();
 		for (OrderProductEntity orderProductEntity : orderProductEntities) {
@@ -91,11 +117,14 @@ public class OrderProductConverter {
 			orderProductEntity.setProduct(productEntity);
 			orderProductEntity.setQuatity(orderProduct.getQuantity());
 			orderProductRepository.save(orderProductEntity);
+			
+			// Trước khi add thì nhớ save vào.
 			orderProductEntities.add(orderProductEntity);
 		}
 		return orderProductEntities;
 	}
-
+	
+	
 	
 
 }
