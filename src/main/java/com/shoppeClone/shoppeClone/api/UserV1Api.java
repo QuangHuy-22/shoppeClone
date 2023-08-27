@@ -17,7 +17,7 @@ import com.shoppeClone.shoppeClone.dto.user.UserDTO;
 import com.shoppeClone.shoppeClone.service.UserService;
 
 @RestController
-@RequestMapping("admin/api/v1/users")
+@RequestMapping("api/v1/users")
 public class UserV1Api {
 	
 	@Autowired
