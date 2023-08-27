@@ -39,13 +39,10 @@ public class ProductConverter {
 	private CategoryConverter categoryConverter;
 	
 	@Autowired
-	private SupplierConverter supplierConverter; 
-	
-	@Autowired
-	private ImageConverter imageConverter;
-	
-	
-	
+	private SupplierConverter supplierConverter;
+
+	private ImageConverter imageConverter; 
+		
 	public ProductDTO toDto(ProductEntity productEntity) {
 
 		 if (productEntity == null) {
