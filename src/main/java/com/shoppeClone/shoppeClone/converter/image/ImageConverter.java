@@ -28,6 +28,12 @@ public class ImageConverter {
 		return imageEntity;
 	}
 	
+	public ImageEntity toEntity(ImageEntity imageEntity, ImageDTO imageDTO) {
+		imageEntity.setDescription(imageDTO.getDescription());
+		imageEntity.setUrl(imageDTO.getUrl());
+		return imageEntity;
+	}
+	
 	public List<ImageDTO> toDTOList(List<ImageEntity> imageEntities){
 		List<ImageDTO> imageDTOList = new ArrayList<>();
 		if (imageEntities != null) {

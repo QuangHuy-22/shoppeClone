@@ -9,14 +9,12 @@ import org.springframework.stereotype.Service;
 import com.shoppeClone.shoppeClone.converter.order.OrderConverter;
 import com.shoppeClone.shoppeClone.dto.order.CreateOrderDTO;
 import com.shoppeClone.shoppeClone.dto.order.OrderDTO;
-import com.shoppeClone.shoppeClone.dto.orderProduct.OrderProductDTO;
 import com.shoppeClone.shoppeClone.entity.OrderEntity;
 import com.shoppeClone.shoppeClone.entity.OrderProductEntity;
-import com.shoppeClone.shoppeClone.exeption.ValidateException;
-import com.shoppeClone.shoppeClone.repository.order.OrderRepostory;
-import com.shoppeClone.shoppeClone.repository.orderProduct.OrderProductReposotory;
+import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.orderProduct.OrderProductRepository;
+import com.shoppeClone.shoppeClone.respository.order.OrderRepostory;
 import com.shoppeClone.shoppeClone.service.OrderService;
-import com.shoppeClone.shoppeClone.utils.AppStringUtils;
 
 import jakarta.transaction.Transactional;
 
@@ -29,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepostory orderRepostory;
 	@Autowired
-	private OrderProductReposotory orderProductReposotory;
+	private OrderProductRepository orderProductReposotory;
 	@Override
 	public OrderDTO createOrder(CreateOrderDTO createOrderDTO) {
 //		Long orderId = createOrderDTO.getOrderId();

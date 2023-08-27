@@ -119,10 +119,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 		List<ProvinceEntity> provinceEntities = selectQuery.getResultList();
 		Long totalItems = countQuery.getSingleResult();
 		
-		// dto -> entity
+		//entity -> dto
 		List<ProvinceDTO> dtos = provinceConverter.toDtoList(provinceEntities);
 			
-		
 		
 		return new PageDTO<>(page, limit, totalItems, dtos);
 	}

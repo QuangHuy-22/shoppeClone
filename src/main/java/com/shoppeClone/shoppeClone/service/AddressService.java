@@ -13,5 +13,6 @@ public interface AddressService {
 	List<AddressDTO> getAddress();
 	AddressDTO updateAddress(Long addressId,AddressDTO addressDTO);
 	void deleteAddress(Long AddressIid);
+	PageDTO<AddressDTO> getPageAddress(Map<String, String> params);
 	
 }

@@ -36,7 +36,10 @@ public class UserConverter {
 		userDTO.setModifierBy(userEntity.getModifierBy());
 		userDTO.setModifierDate(userEntity.getModifierDate());
 		userDTO.setPhoneNumber(userEntity.getPhoneNumber());
+		
+		//Set bằng roleConverter dùng hàm toDTO
 		userDTO.setRole(roleConverter.toDto(userEntity.getRoles()));
+		
 		return userDTO;
 	}
 
@@ -65,6 +68,7 @@ public class UserConverter {
 		userEntity.setPassword(userDTO.getPassword());
 		userEntity.setUsername(userDTO.getUsername());
 		userEntity.setPhoneNumber(userDTO.getPhoneNumber());
+		
 		List<RoleEntity> roles = new ArrayList<>();
 		for(RoleDTO roleDto: userDTO.getRole()) {
 			Optional<RoleEntity> roleEntity = roleRepository.findByCode(roleDto.getCode());

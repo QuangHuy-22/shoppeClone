@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.shoppeClone.shoppeClone.converter.address.AddressConverter;
+import com.shoppeClone.shoppeClone.converter.Address.AddressConverter;
 import com.shoppeClone.shoppeClone.converter.orderProduct.OrderProductConverter;
 import com.shoppeClone.shoppeClone.converter.user.UserConverter;
 import com.shoppeClone.shoppeClone.dto.order.CreateOrderDTO;
@@ -17,10 +17,10 @@ import com.shoppeClone.shoppeClone.entity.AddressEntity;
 import com.shoppeClone.shoppeClone.entity.OrderEntity;
 import com.shoppeClone.shoppeClone.entity.OrderProductEntity;
 import com.shoppeClone.shoppeClone.entity.UserEntity;
-import com.shoppeClone.shoppeClone.exeption.ValidateException;
-import com.shoppeClone.shoppeClone.repository.UserRepository;
-import com.shoppeClone.shoppeClone.repository.address.AddressRepository;
-import com.shoppeClone.shoppeClone.repository.orderProduct.OrderProductReposotory;
+import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.UserRepository;
+import com.shoppeClone.shoppeClone.respository.address.AddressRepository;
+import com.shoppeClone.shoppeClone.respository.orderProduct.OrderProductRepository;
 
 @Component
 public class OrderConverter {
@@ -32,7 +32,7 @@ public class OrderConverter {
 	@Autowired
 	private AddressRepository addressRepository;
 	@Autowired
-	private OrderProductReposotory orderProductReposotory;
+	private OrderProductRepository orderProductReposotory;
 	@Autowired
 	private UserConverter userConverter;
 	@Autowired 
@@ -51,7 +51,7 @@ public class OrderConverter {
 		}
 		orderDTO.setDescription(orderEntity.getDescription());
 
-		List<OrderProductDTO> orderProductDTOs = orderProductConverter.toDTO(orderEntity.getOrderProducts());
+		List<OrderProductDTO> orderProductDTOs = orderProductConverter.toDTO(orderEntity.getOrderProduct());
 		orderDTO.setOrderProductDTOs(orderProductDTOs);
 
 		return orderDTO;
