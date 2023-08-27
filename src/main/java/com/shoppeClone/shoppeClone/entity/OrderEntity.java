@@ -72,6 +72,9 @@ public class OrderEntity extends BaseEntity{
 	public void setOrderProduct(List<OrderProductEntity> orderProduct) {
 		this.orderProduct = orderProduct;
 	}
-	
+	public void addOderProduct(OrderProductEntity orderProductEntity) {
+		orderProduct.add(orderProductEntity);
+		orderProductEntity.setOrder(this);
+	}
 	
 }

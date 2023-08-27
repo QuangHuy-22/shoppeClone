@@ -11,6 +11,7 @@ import com.shoppeClone.shoppeClone.entity.OrderEntity;
 import com.shoppeClone.shoppeClone.entity.OrderProductEntity;
 import com.shoppeClone.shoppeClone.entity.ProductEntity;
 import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.order.OrderRepostory;
 import com.shoppeClone.shoppeClone.respository.orderProduct.OrderProductRepository;
 import com.shoppeClone.shoppeClone.respository.product.ProductRepository;
 
@@ -24,7 +25,7 @@ public class OrderProductConverter {
 	private ProductRepository productRepository;
 
 	@Autowired
-	private OrderRespository orderRepository;
+	private OrderRepostory orderRepository;
 	
 	
 	public OrderProductDTO toDTO(OrderProductEntity orderProductEntity) {

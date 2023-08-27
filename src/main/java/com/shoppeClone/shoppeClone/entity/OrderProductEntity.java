@@ -58,7 +58,8 @@ public class OrderProductEntity extends BaseEntity{
 	public void setQuatity(Integer quatity) {
 		this.quatity = quatity;
 	}
-	
+
+
 	
 	
 }
