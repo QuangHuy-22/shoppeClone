@@ -57,5 +57,7 @@ public class ProvinceDTO {
 	public void setModifierDate(Date modifierDate) {
 		this.modifierDate = modifierDate;
 	}
+
+	
 	
 }
