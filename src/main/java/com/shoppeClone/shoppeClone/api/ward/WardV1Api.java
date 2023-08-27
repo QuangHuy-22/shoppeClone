@@ -47,4 +47,9 @@ public class WardV1Api {
 	        @RequestParam Map<String, String> params) {
 	    return wardService.getWards(params);
 	}
+	
+	 @GetMapping("{wardId}")
+	    public WardDTO getWardById(@PathVariable Long wardId) {
+	        return wardService.getWardByWardId(wardId);
+	    }
 }

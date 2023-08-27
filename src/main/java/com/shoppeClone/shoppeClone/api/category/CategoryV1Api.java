@@ -49,5 +49,10 @@ public class CategoryV1Api {
 		categoryService.deleteCategory(categoryId);
 	}
 	
+	@GetMapping("{categoryId}")
+    public CategoryDTO getCategoryById(@PathVariable Long categoryId) {
+        return categoryService.getCategoryByCategoryId(categoryId);
+    }
+
 
 }

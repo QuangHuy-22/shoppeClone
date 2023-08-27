@@ -47,6 +47,10 @@ public class DistrictV1Api {
 	        @RequestParam Map<String, String> params) {
 	    return districtService.getDistricts(params);
 	}
-
+	
+	 @GetMapping("{districtId}")
+	    public DistrictDTO getDistrictById(@PathVariable Long districtId) {
+	        return districtService.getDistrictByDistrictId(districtId);
+	    }
 	
 }
