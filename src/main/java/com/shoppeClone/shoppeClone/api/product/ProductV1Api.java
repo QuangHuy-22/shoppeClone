@@ -29,7 +29,6 @@ public class ProductV1Api {
 	public ProductDTO createProduct(@RequestBody CreateProductDTO dto) {
 		return productService.createProduct(dto);
 	}
-	
 	@GetMapping
 	public List<ProductDTO> getAll() {
 		return productService.getListProduct();

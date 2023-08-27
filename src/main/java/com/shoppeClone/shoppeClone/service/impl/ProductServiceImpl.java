@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 		ProductEntity productEntity = getProductById(productId);
 		productConverter.toEntity(productEntity, dto);
 		productRepository.save(productEntity);
-
+	
 		return productConverter.toDto(productEntity);
 	}
 
@@ -71,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
 			// Xóa bản ghi liên quan trong image
 			List<ImageEntity> images = new ArrayList<>();
 			for (ImageEntity imageEntity : images) {
+
 				imageRepository.delete(imageEntity);
 			}
 			
