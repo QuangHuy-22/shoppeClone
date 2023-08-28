@@ -1,39 +1,39 @@
 package com.shoppeClone.shoppeClone.dto.address;
 
-import java.util.Date;
+import com.shoppeClone.shoppeClone.dto.district.DistrictDTO;
+import com.shoppeClone.shoppeClone.dto.province.ProvinceDTO;
+import com.shoppeClone.shoppeClone.dto.ward.WardDTO;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.shoppeClone.shoppeClone.entity.DistrictEntity;
-import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
-import com.shoppeClone.shoppeClone.entity.WardEntity;
-
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 public class AddressDTO {
 	private Long addressId;
 	
 	private String description;
 
-	private Long province;
+	private ProvinceDTO province;
 	
-	private Long district;
+	private DistrictDTO district;
 	
-	private Long ward;
+	private WardDTO ward;
+
+	
 
 	public Long getAddressId() {
 		return addressId;
 	}
 
 
+
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
+
+
 	public String getDescription() {
 		return description;
 	}
+
 
 
 	public void setDescription(String description) {
@@ -42,45 +42,46 @@ public class AddressDTO {
 
 
 
-
-	public Long getProvince() {
+	public ProvinceDTO getProvince() {
 		return province;
 	}
 
 
-	public void setProvince(Long province) {
+
+	public void setProvince(ProvinceDTO province) {
 		this.province = province;
 	}
 
 
-	public Long getDistrict() {
+
+	public DistrictDTO getDistrict() {
 		return district;
 	}
 
 
-	public void setDistrict(Long districtEntity) {
-		this.district = districtEntity;
+
+	public void setDistrict(DistrictDTO district) {
+		this.district = district;
 	}
 
 
-	public Long getWard() {
+
+	public WardDTO getWard() {
 		return ward;
 	}
 
 
-	public void setWard(Long ward) {
+
+	public void setWard(WardDTO ward) {
 		this.ward = ward;
 	}
 
 
 
-	
-
-	
-
-	
-
-	
+	@Override
+	public String toString() {
+		return "AddressDTO [addressId=" + addressId + ", description=" + description + ", province=" + province
+				+ ", district=" + district + ", ward=" + ward + "]";
+	}
 	
 }
-

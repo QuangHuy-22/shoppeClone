@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.address.CreateAddressDTO;
 import com.shoppeClone.shoppeClone.dto.orderProduct.OrderProductDTO;
 import com.shoppeClone.shoppeClone.dto.user.UserDTO;
 
@@ -12,9 +13,9 @@ public class OrderDTO {
 
 	private Long orderId;
 	
-	private Long userId;
+	private UserDTO userId;
 	
-	private Long addressId;
+	private AddressDTO addressId;
 	
 	private List<OrderProductDTO> orderProductDTOs = new ArrayList<>();
 
@@ -22,45 +23,76 @@ public class OrderDTO {
 	
 	
 
-	public Long getUserId() {
+	
+	public Long getOrderId() {
+		return orderId;
+	}
+
+
+
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+
+	public UserDTO getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+
+
+
+	public void setUserId(UserDTO userId) {
 		this.userId = userId;
 	}
 
-	public Long getAddressId() {
+
+
+
+	public AddressDTO getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(Long addressId) {
+
+
+
+	public void setAddressId(AddressDTO addressId) {
 		this.addressId = addressId;
 	}
+
+
+
 
 	public List<OrderProductDTO> getOrderProductDTOs() {
 		return orderProductDTOs;
 	}
 
+
+
+
 	public void setOrderProductDTOs(List<OrderProductDTO> orderProductDTOs) {
 		this.orderProductDTOs = orderProductDTOs;
 	}
+
+
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Long getOrderId() {
-		return orderId;
-	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
+
 
 	@Override
 	public String toString() {
