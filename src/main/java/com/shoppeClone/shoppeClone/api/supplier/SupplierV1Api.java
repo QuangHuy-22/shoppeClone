@@ -43,5 +43,9 @@ public class SupplierV1Api {
     public void deleteSupplierById(@PathVariable(value = "supplierId") Long supplierId) {
         supplierService.deleteSupplier(supplierId);
     }
-
+    
+    @GetMapping("{supplierId}")
+    public SupplierDTO getSupplierById(@PathVariable(value = "supplierId") Long supplierId) {
+            return supplierService.getSupplierById(supplierId);
+    }
 }

@@ -1,6 +1,5 @@
 package com.shoppeClone.shoppeClone.api.category;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +49,10 @@ public class CategoryV1Api {
 		categoryService.deleteCategory(categoryId);
 	}
 	
+	@GetMapping("{categoryId}")
+    public CategoryDTO getCategoryById(@PathVariable Long categoryId) {
+        return categoryService.getCategoryByCategoryId(categoryId);
+    }
+
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.cart.CartDTO;
+import com.shoppeClone.shoppeClone.dto.supplier.SupplierDTO;
 import com.shoppeClone.shoppeClone.service.CartService;
 
 import javassist.NotFoundException;
@@ -48,5 +49,8 @@ public class CartV1Api {
 		return cartService.updateCart(cartId, dto);
 	}
     
-    
+    @GetMapping("{cartId}")
+    public CartDTO getCartById(@PathVariable(value = "cartId") Long cartId) {
+            return cartService.getCartById(cartId);
+    }
 }
