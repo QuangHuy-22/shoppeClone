@@ -118,6 +118,14 @@ public class ImageServiceImpl implements ImageService{
 		return imageDTOs;
 	}
 	
+	@Override
+	public ImageDTO getByIdImage(Long Id) {
+		ImageEntity imageEntity = imageRepository.findById(Id)
+				.orElseThrow(() -> new ValidateException("Không có Id này trong bộ nhớ DB"));
+		imageRepository.save(imageEntity);
+		return imageConverter.toDTO(imageEntity);
+	}
+	
 }
 
 	
