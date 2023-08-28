@@ -14,4 +14,6 @@ public interface OrderProductService {
 	OrderProductDTO updateOrderProduct(OrderProductDTO dto, Long orderProductId);
 	
 	void deleteOrderProduct(Long orderProductId);
+	
+	OrderProductDTO getByIdOProduct(Long orderProductId);
 }

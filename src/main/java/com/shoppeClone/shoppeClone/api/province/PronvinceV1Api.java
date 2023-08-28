@@ -48,4 +48,13 @@ public class PronvinceV1Api {
 			@RequestParam Map<String, String> params) {
 		return provinceService.getProvinces(params);
 	}
+	@GetMapping("{provinceId}")
+	public ProvinceDTO getByIdProvince(
+			@PathVariable Long provinceId
+			)
+	{
+		return provinceService.getProvinceByProvinceId(provinceId);
+	}
+	
+	
 }
