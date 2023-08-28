@@ -38,6 +38,13 @@ public class ImageV1Api {
 	{
 		return imageService.getAll();
 	}
+	@GetMapping("{imageId}")
+	public ImageDTO getByIdImage(
+			@PathVariable(value = "imageId") Long Id
+			)
+	{
+		return imageService.getByIdImage(Id);
+	}
 	
 	@PutMapping("{imageId}")
 	public ImageDTO updateImage(

@@ -37,6 +37,14 @@ public class OrderProductV1Api {
 	{
 		return orderProductService.getAllOrderProduct();
 	}
+	@GetMapping("{orderProductId}")
+	public OrderProductDTO getByIdOProduct(
+			@PathVariable Long orderProductId
+			)
+	{
+		return orderProductService.getByIdOProduct(orderProductId);
+	}
+	
 	
 	@PutMapping("{orderProductId}")
 	public OrderProductDTO updateOProduct(

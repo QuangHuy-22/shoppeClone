@@ -1,3 +1,4 @@
+
 package com.shoppeClone.shoppeClone.service.impl;
 
 import java.util.List;
@@ -131,6 +132,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 		// Tìm kiếm id của province
 		ProvinceEntity provinceEntity = provinceRepository.findById(provinceId)
 				.orElseThrow(() -> new ValidateException("Không tìm thấy Id của province"));
+		provinceRepository.save(provinceEntity);
 		return provinceConverter.toDTO(provinceEntity);
 	}
 

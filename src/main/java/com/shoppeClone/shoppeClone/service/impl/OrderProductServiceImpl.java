@@ -72,4 +72,14 @@ public class OrderProductServiceImpl implements OrderProductService {
 		orderProductRepository.delete(orderProductEntity);
 		
 	}
+	
+	@Override
+	public OrderProductDTO getByIdOProduct(Long orderProductId) {
+		
+		OrderProductEntity orderProductEntity = orderProductRepository
+				.findById(orderProductId)
+				.orElseThrow(() -> new ValidateException("Khong tim th id"));
+		orderProductRepository.save(orderProductEntity);
+		return orderProductConverter.toDTO(orderProductEntity);
+	}
 }
