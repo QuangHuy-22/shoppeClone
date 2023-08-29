@@ -1,12 +1,8 @@
-package com.shoppeClone.shoppeClone.converter.address;
+package com.shoppeClone.shoppeClone.converter.Address;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shoppeClone.shoppeClone.exception.ValidateException;
-import com.shoppeClone.shoppeClone.respository.district.DistrictRepository;
-import com.shoppeClone.shoppeClone.respository.pronvice.ProvinceRepository;
-import com.shoppeClone.shoppeClone.respository.ward.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +15,10 @@ import com.shoppeClone.shoppeClone.entity.AddressEntity;
 import com.shoppeClone.shoppeClone.entity.DistrictEntity;
 import com.shoppeClone.shoppeClone.entity.ProvinceEntity;
 import com.shoppeClone.shoppeClone.entity.WardEntity;
+import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.district.DistrictRepository;
+import com.shoppeClone.shoppeClone.respository.pronvice.ProvinceRepository;
+import com.shoppeClone.shoppeClone.respository.ward.WardRepository;
 
 
 @Component
