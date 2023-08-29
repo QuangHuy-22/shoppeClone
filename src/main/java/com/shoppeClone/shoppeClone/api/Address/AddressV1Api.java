@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
-import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
+import com.shoppeClone.shoppeClone.dto.address.CreateAddressDTO;
+import com.shoppeClone.shoppeClone.dto.order.OrderDTO;
 import com.shoppeClone.shoppeClone.service.AddressService;
 
 @RestController
@@ -26,34 +27,40 @@ public class AddressV1Api {
 	@Autowired
 	private AddressService addressService;
 	
-	@PostMapping()
-	public AddressDTO createAddress(@RequestBody AddressDTO dto) {
+	@PostMapping
+	public AddressDTO createAddress(@RequestBody CreateAddressDTO dto) {
 		
 		return addressService.createAddress(dto);
 	}
 	@PutMapping("{addressId}")
-	public AddressDTO updateAddress(
-			@PathVariable(value = "addressId") Long addressId,
-			@RequestBody AddressDTO dto
-			)
-	{
+	public AddressDTO updateAddress(@PathVariable(value = "addressId") Long addressId,@RequestBody CreateAddressDTO dto) {
 		return addressService.updateAddress(addressId, dto);
 	}
-	
-	@GetMapping()
-	public PageDTO<AddressDTO> getAddress(
-			@RequestParam Map<String , String> params) {
-		return addressService.getPageAddress(params);
-	}
-	
+//	@GetMapping()
+//	public PageDTO<AddressDTO> getAddress(
+//			@RequestParam Map<String , String> params) {
+//		return addressService.getAddress(params);
+//	}
 //	@GetMapping
 //	public List<AddressDTO> getaddress(){
 //		return addressService.getAddress();
 //	}
+	@GetMapping
+	public PageDTO<AddressDTO> getPageProduct(
+			@RequestParam Map<String, String> params
+			) 
+	{
+		
+		return addressService.getOrders(params);
+	}
 	
 	@DeleteMapping("{addressId}")
 	public void deleteCategoryById(
 			@PathVariable(value = "addressId") Long categoryId) {
 		addressService.deleteAddress(categoryId);
+	}
+	@GetMapping({"{addressId}"})
+	public AddressDTO getOrerbyOrderId(@PathVariable(value = "addressId") Long addressId){
+		return addressService.getOrderbyOrderId(addressId);
 	}
 }

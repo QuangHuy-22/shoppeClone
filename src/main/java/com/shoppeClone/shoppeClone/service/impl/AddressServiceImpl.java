@@ -3,18 +3,19 @@ package com.shoppeClone.shoppeClone.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.shoppeClone.shoppeClone.exception.ValidateException;
+import com.shoppeClone.shoppeClone.respository.address.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shoppeClone.shoppeClone.converter.Address.AddressConverter;
+import com.shoppeClone.shoppeClone.converter.address.AddressConverter;
 import com.shoppeClone.shoppeClone.dto.PageDTO;
 import com.shoppeClone.shoppeClone.dto.address.AddressDTO;
+import com.shoppeClone.shoppeClone.dto.address.CreateAddressDTO;
+import com.shoppeClone.shoppeClone.dto.order.OrderDTO;
 import com.shoppeClone.shoppeClone.entity.AddressEntity;
-import com.shoppeClone.shoppeClone.exception.ValidateException;
-import com.shoppeClone.shoppeClone.respository.address.AddressRepository;
-import com.shoppeClone.shoppeClone.respository.district.DistrictRepository;
-import com.shoppeClone.shoppeClone.respository.pronvice.ProvinceRepository;
-import com.shoppeClone.shoppeClone.respository.ward.WardRepository;
+import com.shoppeClone.shoppeClone.entity.OrderEntity;
+
 import com.shoppeClone.shoppeClone.service.AddressService;
 import com.shoppeClone.shoppeClone.utils.AppStringUtils;
 
@@ -28,23 +29,12 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressConverter addressConverter;
-	
-	@Autowired
-	private DistrictRepository districtRepostory;
-	@Autowired
-	private ProvinceRepository provinceRepostory;
-	
-	@Autowired
-	private WardRepository wardRepostory;
-	
 	@Autowired
 	private AddressRepository addressRepository;
-	
-	@Autowired
+	@Autowired 
 	private EntityManager entityManager;
-	
 	@Override
-	public AddressDTO createAddress(AddressDTO dto) {
+	public AddressDTO createAddress(CreateAddressDTO dto) {
 		AddressEntity newAddressEntity = addressConverter.toEntity(dto);
 		addressRepository.save(newAddressEntity);
 		AddressDTO result = addressConverter.toDTO(newAddressEntity);
@@ -58,83 +48,95 @@ public class AddressServiceImpl implements AddressService {
 //	}
 
 	@Override
-	public AddressDTO updateAddress(Long addressId, AddressDTO addressDTO) {
-		AddressEntity addressEntity = addressRepository
-				.findById(addressId)
-				.orElseThrow(()-> new ValidateException("Address not found"));
+	public AddressDTO updateAddress(Long addressId, CreateAddressDTO addressDTO) {
+		AddressEntity addressEntity = addressRepository.findById(addressId).orElseThrow(()-> new ValidateException("Address not found"));
 		
-			addressConverter.toEntity(addressEntity, addressDTO);
-			addressRepository.save(addressEntity);
+		addressConverter.toEntity(addressEntity, addressDTO);
+		addressRepository.save(addressEntity);
 		return addressConverter.toDTO(addressEntity);
 	}
 
 	@Override
 	public void deleteAddress(Long AddressIid) {
 		addressRepository
-		.findById(AddressIid)
-		.orElseThrow(() -> new ValidateException("Address not found"));
-		
+		.findById(AddressIid).orElseThrow(() -> new ValidateException("Address not found"));
 		addressRepository.deleteById(AddressIid);
 	}
 
+//	@Override
+//	public List<CreateAddressDTO> getAddress() {
+//		List<AddressEntity> addressEntity = addressRepository.findAll();
+//		List<AddressDTO> addressDtos = addressConverter.toDTOList(addressEntity);
+//		return addressDtos;
+//	}
+
 	@Override
-	public List<AddressDTO> getAddress() {
-		List<AddressEntity> addressEntity = addressRepository.findAll();
-		List<AddressDTO> addressDtos = addressConverter.toDTOList(addressEntity);
-		return addressDtos;
-	}
-	@Override
-	public PageDTO<AddressDTO> getPageAddress(Map<String, String> params) {
-		
-		String limitstr = params.get("limit");
-		String pagestr = params.get("page");
+	public PageDTO<AddressDTO> getOrders(Map<String, String> params) {
+		System.out.println(params);
+		String pageStr = params.get("page");
+		String limitStr = params.get("limit");
 		Integer page = 1;
 		Integer limit = 10;
-		
-		if (AppStringUtils.hasText(pagestr)) {
-			page = Integer.valueOf(pagestr);
+		if (AppStringUtils.hasText(pageStr)) {
+			page = Integer.valueOf(pageStr);
 		}
-		if (AppStringUtils.hasText(limitstr)) {
-			limit = Integer.valueOf(limitstr);
+		if (AppStringUtils.hasText(limitStr)) {
+			limit = Integer.valueOf(limitStr);
 		}
+		// lấy dữ liệu
+		// đếm dữ liệu
+		StringBuilder selectQueryBuilder = new StringBuilder("SELECT c FROM AddressEntity c");
+		StringBuilder countQueryBuilder 
+				= new StringBuilder("SELECT COUNT(c.addressId) FROM AddressEntity c");
 		
-		// Lấy dữ liệu từ database bằng cậu lệnh query và vứt trong StringBuiler
-		
-		StringBuilder selectQueryBuilder = 
-				new StringBuilder("select p from AddressEntity p ");
-		
-		StringBuilder countQueryBuilder = 
-				new StringBuilder("select count(p.addressId) from AddressEntity p ");
-		
-		String Id = params.get("addressId");
-		if (AppStringUtils.hasText(Id)) {
-			selectQueryBuilder.append("where p.addressId like :addressId");
-			countQueryBuilder.append("where p.addressId like :addressId");
+		String name = params.get("orderId");
+		if (AppStringUtils.hasText(name)) {
+			selectQueryBuilder.append(" WHERE c.addressId LIKE :addressId" );
+			countQueryBuilder.append(" WHERE c.addressId LIKE :addressId");
 		}
+	
+		TypedQuery<AddressEntity> selectQuery 
+				= entityManager.createQuery(selectQueryBuilder.toString(), AddressEntity.class);
 		
-		TypedQuery<AddressEntity> selectQuery = 
-				entityManager.createQuery(selectQueryBuilder.toString(), AddressEntity.class);
+		TypedQuery<Long> countQuery 
+			= entityManager.createQuery(countQueryBuilder.toString(), Long.class);
+		Integer firstItems = (page - 1) * limit;
 		
-		TypedQuery<Long> countQuery = 
-				entityManager.createQuery(countQueryBuilder.toString(), Long.class);
-		
-		Integer firsAddress = (page - 1) * limit;
-		
-		if (AppStringUtils.hasText(Id)) {
-			selectQuery.setParameter("addressId", "%" + Id + "%");
-			countQuery.setParameter("addressId","%" + Id + "%");
+		if (AppStringUtils.hasText(name)) {
+			selectQuery.setParameter("addressId", "%" + name + "%");
+			countQuery.setParameter("addressId", "%" + name + "%");
 		}
 		
-		selectQuery.setFirstResult(firsAddress);
+		selectQuery.setFirstResult(firstItems);
 		selectQuery.setMaxResults(limit);
 		
 		List<AddressEntity> addressEntities = selectQuery.getResultList();
 		Long totalItems = countQuery.getSingleResult();
 		
-		List<AddressDTO> addressDTOs = addressConverter.toDTOList(addressEntities);
+		// entity -> dto
+		List<AddressDTO> dtos = addressConverter.toDTOList(addressEntities);
 		
-		return new PageDTO<>(page, limit, totalItems, addressDTOs);
+		
+		return new PageDTO<>(page, limit, totalItems, dtos);
+	
 	}
+
+	@Override
+	public List<CreateAddressDTO> getAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AddressDTO getOrderbyOrderId(Long addressId) {
+		AddressEntity orElseThrow = addressRepository.findById(addressId)
+				.orElseThrow(() -> new ValidateException("Khong tim thấy addressId"));
+		  
+		return addressConverter.toDTO(orElseThrow);
+	}
+
+	
+
 	
 
 }
