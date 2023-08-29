@@ -1,7 +1,10 @@
 package com.shoppeClone.shoppeClone.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.shoppeClone.shoppeClone.dto.PageDTO;
+import com.shoppeClone.shoppeClone.dto.category.CategoryDTO;
 import com.shoppeClone.shoppeClone.dto.order.CreateOrderDTO;
 import com.shoppeClone.shoppeClone.dto.order.OrderDTO;
 
@@ -16,4 +19,6 @@ public interface OrderService {
 	
 	List<OrderDTO> getOrder();
 	
+	PageDTO<OrderDTO> getOrders(Map<String, String> params);
+	OrderDTO getOrderbyOrderId(Long orderId);
 }

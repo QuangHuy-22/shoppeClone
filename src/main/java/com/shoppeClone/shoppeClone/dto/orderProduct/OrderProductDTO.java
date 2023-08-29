@@ -1,12 +1,25 @@
 package com.shoppeClone.shoppeClone.dto.orderProduct;
 
+import com.shoppeClone.shoppeClone.dto.product.ProductDTO;
+
 public class OrderProductDTO {
 	
 	private Long orderProductId;
 	private Long  productId;
 	private Long orderId;
 	private Integer quantity;
+	//Test
+	private ProductDTO product;
 	
+	
+	
+	public ProductDTO getProduct() {
+		return product;
+	}
+	public void setProduct(ProductDTO product) {
+		this.product = product;
+	}
+	//
 	
 	public Long getOrderProductId() {
 		return orderProductId;
