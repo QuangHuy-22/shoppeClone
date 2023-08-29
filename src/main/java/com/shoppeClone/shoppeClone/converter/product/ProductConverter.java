@@ -43,6 +43,8 @@ public class ProductConverter {
 
 	@Autowired
 	private ImageConverter imageConverter; 
+	
+	
 		
 	public ProductDTO toDto(ProductEntity productEntity) {
 
@@ -66,12 +68,16 @@ public class ProductConverter {
 	        // Assuming you have a converter for ImageEntity
 	        productDTO.setImages(imageConverter.toDTOList(productEntity.getImages()));
 	       
-		
+	        
+	       
+	        
 		return productDTO;
 
 	}
 	
 	public ProductEntity toEntity(CreateProductDTO dto) {
+		
+		
         ProductEntity productEntity = new ProductEntity();
         updateProductEntityFromDto(productEntity, dto);
         return productEntity;
@@ -101,6 +107,7 @@ public class ProductConverter {
         for (Long imageId : imageIds) {
             ImageEntity image = getImageById(imageId);
             images.add(image);
+            image.setProduct(productEntity);
         }
         productEntity.setImages(images);
     }
@@ -108,7 +115,7 @@ public class ProductConverter {
     public List<ProductDTO> toDTOList(List<ProductEntity> productEntites) {
     	List<ProductDTO> productDTOList = new ArrayList<>();
     	for (ProductEntity productEntity : productEntites) {
-			productDTOList.add(toDto(productEntity));
+    	        productDTOList.add(toDto(productEntity));
 		}
     	return productDTOList;
     }
@@ -117,6 +124,7 @@ public class ProductConverter {
     	List<ProductEntity> productEntities = new ArrayList<>();
     	for (CreateProductDTO producDTO : productDTOs) {
 			productEntities.add(toEntity(producDTO));
+			
 		}
     	return productEntities;
     }
@@ -135,19 +143,15 @@ public class ProductConverter {
         return imageRepository.findById(imageId)
                 .orElseThrow(() -> new ValidateException("Không tìm thấy hình ảnh"));
     }
+    private List<Long> getProductImageIds(ProductEntity productEntity) {
+        List<Long> imageIds = new ArrayList<>();
+        for (ImageEntity imageEntity : productEntity.getImages()) {
+            imageIds.add(imageEntity.getImageId());
+        }
+        return imageIds;
+    }
 
-	public ProductEntity toEntity(ProductDTO dto) {
-		ProductEntity productEntity = new ProductEntity();
-		 productEntity.setName(dto.getName());
-	        productEntity.setDescription(dto.getDescription());
-	        productEntity.setImportPrice(dto.getImportPrice());
-	        productEntity.setPrice(dto.getPrice());
-	        productEntity.setDiscountPercent(dto.getDiscountPercent());
-	        productEntity.setCreateDate(dto.getCreatedDate());
-
-	       
-		return productEntity;
-	}
+	
 }
 
 

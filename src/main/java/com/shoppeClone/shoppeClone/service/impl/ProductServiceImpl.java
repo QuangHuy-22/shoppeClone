@@ -51,9 +51,11 @@ public class ProductServiceImpl implements ProductService {
 		validateProductName(name);
 
 		ProductEntity productEntity = productConverter.toEntity(dto);
+		
 		productRepository.save(productEntity);
-
+		imageRepository.saveAll(productEntity.getImages());
 		ProductDTO resultDto = productConverter.toDto(productEntity);
+		
 		return resultDto;
 	}
 
@@ -120,22 +122,19 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		// Lấy dữ liệu
-		StringBuilder selectQueryBuilder = new StringBuilder("select p from ProductEntity p ");
-		StringBuilder countQueryBuilder = new StringBuilder("select count(p.productId) from ProductEntity p ");
+		StringBuilder selectQueryBuilder = 
+				new StringBuilder("select p from ProductEntity p ");
+		StringBuilder countQueryBuilder = 
+				new StringBuilder("select count(p.productId) from ProductEntity p ");
 
 		// khai báo url, description
 		String name = params.get("name");
-		String description = params.get("description");
+		
 
 		// Tìm kiếm theo url và description
 		if (AppStringUtils.hasText(name)) {
 			selectQueryBuilder.append("where p.name like :name");
 			countQueryBuilder.append("where p.name like : name");
-		}
-
-		if (AppStringUtils.hasText(description)) {
-			selectQueryBuilder.append("where p.description like :description");
-			countQueryBuilder.append("where p.description like :description");
 		}
 
 		TypedQuery<ProductEntity> selectQuery = entityManager.createQuery(selectQueryBuilder.toString(),
@@ -151,10 +150,7 @@ public class ProductServiceImpl implements ProductService {
 			countQuery.setParameter("name", "%" + name + "%");
 		}
 
-		if (AppStringUtils.hasText(description)) {
-			selectQuery.setParameter("description", "%" + description + "%");
-			countQuery.setParameter("description", "%" + description + "%");
-		}
+		
 
 		selectQuery.setFirstResult(firsImage);
 		selectQuery.setMaxResults(limit);
@@ -162,6 +158,7 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductEntity> productEntities = selectQuery.getResultList();
 		Long totalItems = countQuery.getSingleResult();
 
+	
 		//entity -> dto
 		List<ProductDTO> productDTOs = productConverter.toDTOList(productEntities);
 
@@ -173,7 +170,6 @@ public class ProductServiceImpl implements ProductService {
 		ProductEntity productEntity = productRepository
 				.findById(productId)
 				.orElseThrow(() -> new ValidateException("Không tìm thấy Id của product"));
-				
 		return productConverter.toDto(productEntity);
 	}
 

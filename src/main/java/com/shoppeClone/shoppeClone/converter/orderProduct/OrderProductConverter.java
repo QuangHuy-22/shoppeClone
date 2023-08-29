@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shoppeClone.shoppeClone.converter.product.ProductConverter;
 import com.shoppeClone.shoppeClone.dto.orderProduct.OrderProductDTO;
 import com.shoppeClone.shoppeClone.entity.OrderEntity;
 import com.shoppeClone.shoppeClone.entity.OrderProductEntity;
@@ -27,6 +28,9 @@ public class OrderProductConverter {
 	@Autowired
 	private OrderRepostory orderRepository;
 	
+	@Autowired
+	private ProductConverter productConverter;
+	
 	
 	public OrderProductDTO toDTO(OrderProductEntity orderProductEntity) {
 		OrderProductDTO orderProductDTO = new OrderProductDTO();
@@ -34,6 +38,7 @@ public class OrderProductConverter {
 		orderProductDTO.setQuantity(orderProductEntity.getQuatity());
 		orderProductDTO.setProductId(orderProductEntity.getProduct().getProductId());
 		orderProductDTO.setOrderId(orderProductEntity.getOrder().getOrderId());
+		orderProductDTO.setProduct(productConverter.toDto(orderProductEntity.getProduct()));
 		
 		return orderProductDTO;
 		

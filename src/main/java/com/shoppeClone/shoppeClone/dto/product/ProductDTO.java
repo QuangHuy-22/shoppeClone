@@ -1,5 +1,6 @@
 package com.shoppeClone.shoppeClone.dto.product;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,19 @@ public class ProductDTO {
 //    private Long categoryId; // Thay vì trực tiếp là CategoryDTO
 //    private Long supplierId;
     
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
+    private List<ImageDTO> imageIds;
+    
+    
+    
+    public List<ImageDTO> getImageIds() {
+		return imageIds;
+	}
+
+	public void setImageIds(List<ImageDTO> imageIds) {
+		this.imageIds = imageIds;
+	}
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Ho_Chi_Minh")
 	private Date createdDate;
     
 
