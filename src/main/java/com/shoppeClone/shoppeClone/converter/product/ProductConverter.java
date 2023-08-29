@@ -41,6 +41,7 @@ public class ProductConverter {
 	@Autowired
 	private SupplierConverter supplierConverter;
 
+	@Autowired
 	private ImageConverter imageConverter; 
 		
 	public ProductDTO toDto(ProductEntity productEntity) {
